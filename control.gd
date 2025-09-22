@@ -7,11 +7,10 @@ var interalArray = []
 # @onready = used only when needed
 @onready var option_edit = $ColorRect/option
 @onready var weight_edit = $ColorRect/weight
-@onready var add_button = $ColorRect/add_option
 @onready var list_container = $ColorRect/ScrollContainer/vContainer
 
 func _ready() -> void:
-	add_button.pressed.connect(_on_add_option_pressed) # connect add_button function -> scene node
+	pass # skip over ready funciton
 
 func _on_add_option_pressed() -> void: # function: add_button is pressed
 	create_new_item(option_edit.text, weight_edit.text) # create new item in list	
@@ -24,13 +23,13 @@ func create_new_item(item_text, weight_text): # function: create new item in lis
 	
 	elif weight_text.is_valid_int() == false:
 		print("Please input a number") # DEBUG
-		weight_edit.clear()
-		weight_edit.edit()
+		weight_edit.clear() # clear current text
+		weight_edit.edit() # autoset to typing in box
 		return
 	
 	for n in int(weight_text):
 		interalArray.append(item_text)
-		print(interalArray[n])
+		print(interalArray[interalArray.size()-1])
 	
 	list_container.add_item(item_text + " (" + String(weight_text) + ")") # add item to list
 	option_edit.clear() # clear current text
@@ -53,4 +52,5 @@ func _on_choice_option_pressed() -> void:
 		print("List is empty") # DEBUG
 		return
 	
-	var randIdx = rng.randi_range(0, list_container.item_count)
+	var randIdx = rng.randi_range(0, interalArray.size() - 1)
+	print("index: " + str(randIdx) + ": " + interalArray[randIdx])
