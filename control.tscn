@@ -1,10 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://s7bbs2c7mfyj"]
+[gd_scene load_steps=2 format=3 uid="uid://drum0fn65l20b"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uchyk"]
-bg_color = Color(0.30275, 0.287, 0.35, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fbet"]
-bg_color = Color(1, 1, 1, 1)
+[ext_resource type="Script" uid="uid://crwd7ulfsh7ou" path="res://control.gd" id="1_0fbet"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -13,25 +9,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0fbet")
 
-[node name="bg" type="Panel" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_uchyk")
+color = Color(0.24, 0.245, 0.3, 1)
 
-[node name="hb_bg" type="Panel" parent="."]
+[node name="user_output" type="Label" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 100.0
-offset_top = 100.0
-offset_right = -100.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
 offset_bottom = -100.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0fbet")
+grow_vertical = 0
+
+[node name="user_input" type="LineEdit" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.2813
+offset_top = -31.0
+offset_right = 34.2813
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
