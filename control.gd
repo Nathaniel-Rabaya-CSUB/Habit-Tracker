@@ -8,9 +8,10 @@ var interalArray = []
 @onready var option_edit = $ColorRect/option
 @onready var weight_edit = $ColorRect/weight
 @onready var list_container = $ColorRect/ScrollContainer/vContainer
+@onready var pop_up = $"Decision Pop Up"
 
 func _ready() -> void:
-	pass # skip over ready funciton
+	pass
 
 func _on_add_option_pressed() -> void: # function: add_button is pressed
 	create_new_item(option_edit.text, weight_edit.text) # create new item in list	
@@ -47,10 +48,15 @@ func _on_remove_option_pressed() -> void: # function: remove_button is pressed
 		print("Select an item to remove") # DEBUG
 		return
 
-func _on_choice_option_pressed() -> void:
+func _on_decide_option_pressed() -> void:
 	if list_container.item_count == 0: # check if list is empty
 		print("List is empty") # DEBUG
 		return
 	
-	var randIdx = rng.randi_range(0, interalArray.size() - 1)
-	print("index: " + str(randIdx) + ": " + interalArray[randIdx])
+	var randIdx = rng.randi_range(0, interalArray.size() - 1) # identify random index
+	print("index: " + str(randIdx) + ": " + interalArray[randIdx]) # DEBUG
+	
+	pop_up.show()
+
+func _on_ok_button_pressed() -> void:
+	pop_up.hide()
