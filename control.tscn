@@ -51,6 +51,21 @@ offset_right = 34.2813
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
+text = "item"
+
+[node name="weight" type="LineEdit" parent="ColorRect"]
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.2813
+offset_top = -94.0
+offset_right = 34.2813
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "weight"
 
 [node name="add_option" type="Button" parent="ColorRect"]
 layout_mode = 1
@@ -67,7 +82,7 @@ grow_vertical = 0
 text = "Add"
 metadata/_edit_use_anchors_ = true
 
-[node name="add_option2" type="Button" parent="ColorRect"]
+[node name="remove_option" type="Button" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.654375
@@ -82,5 +97,21 @@ grow_vertical = 0
 text = "Remove"
 metadata/_edit_use_anchors_ = true
 
+[node name="choice_option" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.355625
+anchor_top = 0.97625
+anchor_right = 0.395625
+anchor_bottom = 0.97625
+offset_left = -19.5
+offset_top = -31.0
+offset_right = 19.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Choice"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="ColorRect/add_option" to="." method="_on_add_option_pressed"]
-[connection signal="pressed" from="ColorRect/add_option2" to="." method="_on_remove_option_pressed"]
+[connection signal="pressed" from="ColorRect/remove_option" to="." method="_on_remove_option_pressed"]
+[connection signal="pressed" from="ColorRect/choice_option" to="." method="_on_choice_option_pressed"]
