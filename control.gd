@@ -47,6 +47,15 @@ func create_new_item(item_text, weight_text): # function: create new item in lis
 		weight_edit.edit() # autoset to typing in box
 		return
 	
+	for n in interalArray.size()-1:
+		if item_text == interalArray[n]:
+			print("Item already in list")
+			error_pu_text.text = "Item already in list"
+			error_pu.show()
+			option_edit.clear() # clear current text
+			option_edit.edit() # autoset to typing in box
+			return
+	
 	for n in int(weight_text): # for loop to add to internalArray
 		interalArray.append(item_text) # add to internalArray
 		print(interalArray[interalArray.size()-1]) # DEBUG
@@ -79,6 +88,8 @@ func _on_remove_option_pressed() -> void: # function: remove_button is pressed
 		list_container.remove_item(removeIndex) # remove selected index
 	else:
 		print("Select an item to remove") # DEBUG
+		error_pu_text.text = "Select an item to remove"
+		error_pu.show()
 		return
 
 func _on_decide_option_pressed() -> void:

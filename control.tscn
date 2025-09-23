@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://drum0fn65l20b"]
+[gd_scene load_steps=11 format=3 uid="uid://drum0fn65l20b"]
 
 [ext_resource type="Script" uid="uid://crwd7ulfsh7ou" path="res://control.gd" id="1_0fbet"]
 [ext_resource type="Texture2D" uid="uid://p5idsdrfhcka" path="res://assets/logo.png" id="2_62e2m"]
 [ext_resource type="Texture2D" uid="uid://y8danyw8wctv" path="res://assets/bottom_panel.png" id="3_qtu10"]
 [ext_resource type="Texture2D" uid="uid://hoisog1dfwci" path="res://assets/side_panel.png" id="4_ee4bf"]
+[ext_resource type="Texture2D" uid="uid://bdawpweigv7uo" path="res://assets/download.jpg" id="5_kbped"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qtu10"]
 texture = ExtResource("2_62e2m")
@@ -13,6 +14,12 @@ texture = ExtResource("3_qtu10")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kbped"]
 texture = ExtResource("4_ee4bf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fj5cn"]
+texture = ExtResource("5_kbped")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iy58a"]
+texture = ExtResource("5_kbped")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -199,32 +206,32 @@ text = "Weight : "
 [node name="Decision Pop Up" type="Window" parent="."]
 title = "The decision is..."
 initial_position = 1
-size = Vector2i(350, 150)
+size = Vector2i(300, 300)
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="Decision Pop Up"]
+[node name="ColorRect" type="Panel" parent="Decision Pop Up"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.769114, 0.720748, 0.505632, 1)
+theme_override_styles/panel = SubResource("StyleBoxTexture_fj5cn")
 
 [node name="decision" type="Label" parent="Decision Pop Up/ColorRect"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+anchors_preset = -1
+anchor_top = 0.377
+anchor_right = 1.0
+anchor_bottom = 0.817
+offset_top = -0.0999985
+offset_bottom = -0.100006
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "temporary"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="decision_ok_button" type="Button" parent="Decision Pop Up"]
 anchors_preset = 7
@@ -243,16 +250,16 @@ text = "OK"
 [node name="Error Pop Up" type="Window" parent="."]
 title = "Input Error"
 initial_position = 2
-size = Vector2i(350, 150)
+size = Vector2i(300, 300)
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="Error Pop Up"]
+[node name="ColorRect" type="Panel" parent="Error Pop Up"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.769114, 0.720748, 0.505632, 1)
+theme_override_styles/panel = SubResource("StyleBoxTexture_iy58a")
 
 [node name="error" type="Label" parent="Error Pop Up/ColorRect"]
 layout_mode = 1
@@ -267,7 +274,7 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "temporary"
 
 [node name="error_ok_button" type="Button" parent="Error Pop Up/ColorRect"]
