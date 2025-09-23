@@ -16,6 +16,11 @@ var interalArray = []
 func _ready() -> void:
 	pass
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_ENTER: # if enter key pressed
+		print("Enter") # Debug
+		create_new_item(option_edit.text, weight_edit.text) # create new item in list
+
 func _on_add_option_pressed() -> void: # function: add_button is pressed
 	create_new_item(option_edit.text, weight_edit.text) # create new item in list	
 
@@ -36,22 +41,22 @@ func create_new_item(item_text, weight_text): # function: create new item in lis
 		option_edit.edit() # autoset to typing in box
 		return
 	
-	elif weight_text.is_empty():
-		weight_text = "1"
+	elif weight_text.is_empty(): # if text field empty
+		weight_text = "1" # default weight to 1
 	
 	elif weight_text.is_valid_int() == false || weight_text.to_int() <= 0:
 		print("Please input a positive number") # DEBUG
-		error_pu_text.text = "Please input a positive number"
-		error_pu.show()
+		error_pu_text.text = "Please input a positive number" # error message
+		error_pu.show() # show popup
 		weight_edit.clear() # clear current text
 		weight_edit.edit() # autoset to typing in box
 		return
 	
 	for n in interalArray.size()-1:
-		if item_text == interalArray[n]:
-			print("Item already in list")
-			error_pu_text.text = "Item already in list"
-			error_pu.show()
+		if item_text == interalArray[n]: # text field already in list
+			print("Item already in list") # DEBUG
+			error_pu_text.text = "Item already in list" # error message
+			error_pu.show()# show popup
 			option_edit.clear() # clear current text
 			option_edit.edit() # autoset to typing in box
 			return
@@ -68,13 +73,13 @@ func create_new_item(item_text, weight_text): # function: create new item in lis
 func _on_remove_option_pressed() -> void: # function: remove_button is pressed
 	if list_container.item_count == 0: # check if list is empty
 		print("List is empty") # DEBUG
-		error_pu_text.text = "List is empty"
-		error_pu.show()
+		error_pu_text.text = "List is empty" # error message
+		error_pu.show() # show popup
 		return
 	var selectedItem = list_container.get_selected_items() # return pointer to selected item
 	if selectedItem.size() > 0: # selectedItem = size of array, size() only for arrays
 		var removeIndex = selectedItem[0] # dereference pointer
-		var fullText = list_container.get_item_text(removeIndex)
+		var fullText = list_container.get_item_text(removeIndex) # full text from container list
 		var editText # var to store string
 		for n in fullText.length(): # for loop n -> fullText string size
 			if(fullText[n] == "("): # find "(" in string
@@ -88,24 +93,24 @@ func _on_remove_option_pressed() -> void: # function: remove_button is pressed
 		list_container.remove_item(removeIndex) # remove selected index
 	else:
 		print("Select an item to remove") # DEBUG
-		error_pu_text.text = "Select an item to remove"
-		error_pu.show()
+		error_pu_text.text = "Select an item to remove" # error message
+		error_pu.show() # show popup
 		return
 
 func _on_decide_option_pressed() -> void:
 	if list_container.item_count == 0: # check if list is empty
 		print("List is empty") # DEBUG
-		error_pu_text.text = "List is empty"
-		error_pu.show()
+		error_pu_text.text = "List is empty" # error message
+		error_pu.show() # show popup
 		return
 	
 	var randIdx = rng.randi_range(0, interalArray.size() - 1) # identify random index
 	print("index: " + str(randIdx) + ": " + interalArray[randIdx]) # DEBUG
-	decision_pu_text.text = "Your choice is: " + interalArray[randIdx]
-	decision_pu.show()
+	decision_pu_text.text = "Your choice is: " + interalArray[randIdx] # choice message
+	decision_pu.show() # show popup
 
 func decision_ok_button_pressed() -> void:
-	decision_pu.hide()
+	decision_pu.hide() # hide popup
 
 func error_ok_button_pressed() -> void:
-	error_pu.hide()
+	error_pu.hide() # hide popup
