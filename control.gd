@@ -22,17 +22,18 @@ func create_new_item(item_text, weight_text): # function: create new item in lis
 		option_edit.edit() # autoset to typing in box
 		return
 	
-	elif weight_text.is_valid_int() == false:
-		print("Please input a number") # DEBUG
+	elif weight_text.is_valid_int() == false || weight_text.to_int() <= 0:
+		print("Please input a positive number") # DEBUG
 		weight_edit.clear() # clear current text
 		weight_edit.edit() # autoset to typing in box
 		return
 	
-	for n in int(weight_text):
-		interalArray.append(item_text)
-		print(interalArray[interalArray.size()-1])
+	for n in int(weight_text): # for loop to add to internalArray
+		interalArray.append(item_text) # add to internalArray
+		print(interalArray[interalArray.size()-1]) # DEBUG
 	
-	list_container.add_item(item_text + " (" + String(weight_text) + ")") # add item to list
+	list_container.add_item(item_text+ " (" + String(weight_text) + ")") # add item to list
+	weight_edit.clear() # clear current text
 	option_edit.clear() # clear current text
 	option_edit.edit() # autoset to typing in box
 
@@ -43,6 +44,11 @@ func _on_remove_option_pressed() -> void: # function: remove_button is pressed
 	var selectedItem = list_container.get_selected_items() # return pointer to selected item
 	if selectedItem.size() > 0: # selectedItem = size of array, size() only for arrays
 		var removeIndex = selectedItem[0] # dereference pointer
+		var fullText = list_container.get_item_text(removeIndex)
+		for n in range(interalArray.size()-1, -1, -1):
+			if interalArray[n] == list_container.get_item_text(removeIndex):
+				interalArray.remove_at(n)
+		print(interalArray.size()) # DEBUG
 		list_container.remove_item(removeIndex) # remove selected index
 	else:
 		print("Select an item to remove") # DEBUG
