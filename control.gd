@@ -22,6 +22,16 @@ func create_new_item(item_text, weight_text): # function: create new item in lis
 		option_edit.edit() # autoset to typing in box
 		return
 	
+	elif item_text.contains("(") || item_text.contains(")"):
+		print("Do not add parantheses")
+		weight_edit.clear() # clear current text
+		option_edit.clear() # clear current text
+		option_edit.edit() # autoset to typing in box
+		return
+	
+	elif weight_text.is_empty():
+		weight_text = "1"
+	
 	elif weight_text.is_valid_int() == false || weight_text.to_int() <= 0:
 		print("Please input a positive number") # DEBUG
 		weight_edit.clear() # clear current text
@@ -32,7 +42,7 @@ func create_new_item(item_text, weight_text): # function: create new item in lis
 		interalArray.append(item_text) # add to internalArray
 		print(interalArray[interalArray.size()-1]) # DEBUG
 	
-	list_container.add_item(item_text+ " (" + String(weight_text) + ")") # add item to list
+	list_container.add_item(item_text + " (" + String(weight_text) + ")") # add item to list
 	weight_edit.clear() # clear current text
 	option_edit.clear() # clear current text
 	option_edit.edit() # autoset to typing in box
@@ -45,10 +55,16 @@ func _on_remove_option_pressed() -> void: # function: remove_button is pressed
 	if selectedItem.size() > 0: # selectedItem = size of array, size() only for arrays
 		var removeIndex = selectedItem[0] # dereference pointer
 		var fullText = list_container.get_item_text(removeIndex)
-		for n in range(interalArray.size()-1, -1, -1):
-			if interalArray[n] == list_container.get_item_text(removeIndex):
-				interalArray.remove_at(n)
+		var editText # var to store string
+		for n in fullText.length(): # for loop n -> fullText string size
+			if(fullText[n] == "("): # find "(" in string
+				editText = fullText.substr(0, n-1) # isolate start of text to space before "("
+				print (editText) # DEBUG
+		for n in range(interalArray.size()-1, -1, -1): # for loop interalArray.size()-1 > -1, i--
+			if interalArray[n] == editText: # element == decision - weight string
+				interalArray.remove_at(n) # remove from interalArray
 		print(interalArray.size()) # DEBUG
+		print(interalArray) # DEBUG
 		list_container.remove_item(removeIndex) # remove selected index
 	else:
 		print("Select an item to remove") # DEBUG
