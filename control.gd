@@ -8,7 +8,10 @@ var interalArray = []
 @onready var option_edit = $ColorRect/option
 @onready var weight_edit = $ColorRect/weight
 @onready var list_container = $ColorRect/ScrollContainer/vContainer
-@onready var pop_up = $"Decision Pop Up"
+@onready var decision_pu = $"Decision Pop Up"
+@onready var decision_pu_text = $"Decision Pop Up/ColorRect/decision"
+@onready var error_pu = $"Error Pop Up"
+@onready var error_pu_text = $"Error Pop Up/ColorRect/error"
 
 func _ready() -> void:
 	pass
@@ -19,11 +22,15 @@ func _on_add_option_pressed() -> void: # function: add_button is pressed
 func create_new_item(item_text, weight_text): # function: create new item in list
 	if item_text.is_empty(): # check if empty
 		print("Please input an option") # DEBUG
+		error_pu_text.text = "Please input an option"
+		error_pu.show()
 		option_edit.edit() # autoset to typing in box
 		return
 	
 	elif item_text.contains("(") || item_text.contains(")"):
 		print("Do not add parantheses")
+		error_pu_text.text = "Do not add parantheses"
+		error_pu.show()
 		weight_edit.clear() # clear current text
 		option_edit.clear() # clear current text
 		option_edit.edit() # autoset to typing in box
@@ -34,6 +41,8 @@ func create_new_item(item_text, weight_text): # function: create new item in lis
 	
 	elif weight_text.is_valid_int() == false || weight_text.to_int() <= 0:
 		print("Please input a positive number") # DEBUG
+		error_pu_text.text = "Please input a positive number"
+		error_pu.show()
 		weight_edit.clear() # clear current text
 		weight_edit.edit() # autoset to typing in box
 		return
@@ -50,6 +59,8 @@ func create_new_item(item_text, weight_text): # function: create new item in lis
 func _on_remove_option_pressed() -> void: # function: remove_button is pressed
 	if list_container.item_count == 0: # check if list is empty
 		print("List is empty") # DEBUG
+		error_pu_text.text = "List is empty"
+		error_pu.show()
 		return
 	var selectedItem = list_container.get_selected_items() # return pointer to selected item
 	if selectedItem.size() > 0: # selectedItem = size of array, size() only for arrays
@@ -73,12 +84,17 @@ func _on_remove_option_pressed() -> void: # function: remove_button is pressed
 func _on_decide_option_pressed() -> void:
 	if list_container.item_count == 0: # check if list is empty
 		print("List is empty") # DEBUG
+		error_pu_text.text = "List is empty"
+		error_pu.show()
 		return
 	
 	var randIdx = rng.randi_range(0, interalArray.size() - 1) # identify random index
 	print("index: " + str(randIdx) + ": " + interalArray[randIdx]) # DEBUG
-	
-	pop_up.show()
+	decision_pu_text.text = "Your choice is: " + interalArray[randIdx]
+	decision_pu.show()
 
-func _on_ok_button_pressed() -> void:
-	pop_up.hide()
+func decision_ok_button_pressed() -> void:
+	decision_pu.hide()
+
+func error_ok_button_pressed() -> void:
+	error_pu.hide()
