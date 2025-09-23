@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://drum0fn65l20b"]
+[gd_scene load_steps=8 format=3 uid="uid://drum0fn65l20b"]
 
 [ext_resource type="Script" uid="uid://crwd7ulfsh7ou" path="res://control.gd" id="1_0fbet"]
+[ext_resource type="Texture2D" uid="uid://p5idsdrfhcka" path="res://assets/logo.png" id="2_62e2m"]
+[ext_resource type="Texture2D" uid="uid://y8danyw8wctv" path="res://assets/bottom_panel.png" id="3_qtu10"]
+[ext_resource type="Texture2D" uid="uid://hoisog1dfwci" path="res://assets/side_panel.png" id="4_ee4bf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qtu10"]
+texture = ExtResource("2_62e2m")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ee4bf"]
+texture = ExtResource("3_qtu10")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kbped"]
+texture = ExtResource("4_ee4bf")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -12,6 +24,7 @@ grow_vertical = 2
 script = ExtResource("1_0fbet")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(800, 800)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,97 +33,168 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.24, 0.245, 0.3, 1)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect"]
+[node name="title" type="Panel" parent="ColorRect"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-offset_bottom = 50.0
+offset_left = -400.0
+offset_right = 400.0
+offset_bottom = 272.0
 grow_horizontal = 2
-grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qtu10")
 
-[node name="vContainer" type="ItemList" parent="ColorRect/ScrollContainer"]
+[node name="bottom" type="Panel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -160.0
+offset_right = 400.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_ee4bf")
+
+[node name="side" type="Panel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.57
+anchor_bottom = 0.57
+offset_top = -184.0
+offset_right = 80.0
+offset_bottom = 184.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_kbped")
+
+[node name="side2" type="Panel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.57
+anchor_right = 1.0
+anchor_bottom = 0.57
+offset_left = -80.0
+offset_top = -184.0
+offset_bottom = 184.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_kbped")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
 layout_mode = 2
-size_flags_horizontal = 3
+anchor_left = 0.1
+anchor_top = 0.34
+anchor_right = 0.9
+anchor_bottom = 0.8
+
+[node name="list" type="ItemList" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="option" type="LineEdit" parent="ColorRect"]
 layout_mode = 2
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchor_top = 0.842
+anchor_right = 0.702
 anchor_bottom = 1.0
-offset_left = -34.2813
-offset_top = -31.0
-offset_right = 34.2813
-offset_bottom = -20.0
+offset_left = 136.0
+offset_top = -6.60004
+offset_right = -140.6
+offset_bottom = -102.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "item"
+scale = Vector2(1.5, 1.5)
+alignment = 1
 
 [node name="weight" type="LineEdit" parent="ColorRect"]
 layout_mode = 2
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchor_top = 0.915
+anchor_right = 0.427
 anchor_bottom = 1.0
-offset_left = -34.2813
-offset_top = -94.0
-offset_right = 34.2813
-offset_bottom = -63.0
+offset_left = 138.0
+offset_top = -7.0
+offset_right = -66.6
+offset_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "weight"
+scale = Vector2(1.5, 1.5)
+alignment = 1
 
 [node name="add_option" type="Button" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.599375
-anchor_top = 0.97625
-anchor_right = 0.599375
-anchor_bottom = 0.97625
-offset_left = -19.5
-offset_top = -31.0
-offset_right = 19.5
+anchor_left = 0.734
+anchor_top = 0.844
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.79999
+offset_top = -7.20001
+offset_right = -172.0
+offset_bottom = -101.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(1.5, 1.5)
 text = "Add"
 metadata/_edit_use_anchors_ = true
 
 [node name="remove_option" type="Button" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.654375
-anchor_top = 0.97625
-anchor_right = 0.694375
-anchor_bottom = 0.97625
-offset_left = -19.5
-offset_top = -31.0
-offset_right = 19.5
+anchor_left = 0.824
+anchor_top = 0.842
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.79993
+offset_top = -6.60004
+offset_right = -68.0
+offset_bottom = -102.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(1.5, 1.5)
 text = "Remove"
 metadata/_edit_use_anchors_ = true
 
 [node name="decide_option" type="Button" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.355625
-anchor_top = 0.97625
-anchor_right = 0.395625
-anchor_bottom = 0.97625
-offset_left = -19.5
-offset_top = -31.0
-offset_right = 19.5
+anchor_left = 0.822
+anchor_top = 0.917
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.39996
+offset_top = -6.60004
+offset_right = -69.0
+offset_bottom = -42.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(1.5, 1.5)
 text = "Choice"
 metadata/_edit_use_anchors_ = true
+
+[node name="l_option" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.841
+anchor_right = 0.156
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = 0.200012
+offset_right = -32.8
+offset_bottom = -104.0
+scale = Vector2(1.5, 1.5)
+text = "Option  :"
+
+[node name="l_weight" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.912
+anchor_right = 0.162
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = 0.399963
+offset_right = -33.6
+offset_bottom = -47.0
+scale = Vector2(1.5, 1.5)
+text = "Weight : "
 
 [node name="Decision Pop Up" type="Window" parent="."]
 title = "The decision is..."
