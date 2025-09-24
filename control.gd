@@ -52,7 +52,7 @@ func create_new_item(item_text, weight_text): # function: create new item in lis
 		weight_edit.edit() # autoset to typing in box
 		return
 	
-	for n in interalArray.size()-1:
+	for n in interalArray.size():
 		if item_text == interalArray[n]: # text field already in list
 			print("Item already in list") # DEBUG
 			error_pu_text.text = "Item already in list" # error message
